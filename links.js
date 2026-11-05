@@ -19,7 +19,7 @@ window.SITE = {
   /* Profile photo: put your photo in the "images" folder, then type its
      file name here, e.g. "images/profile.jpg".
      Leave it as "" to show the "N" placeholder circle. */
-  photo: "",
+  photo: "images/profile.jpg",
 };
 
 /* LINKS — shown on the page from top to bottom, in this order.

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Share preview source. To update it: edit the text below, then re-export as og-image.png (1200 × 630). -->
+  <defs>
+    <radialGradient id="glow" cx="20%" cy="0%" r="90%">
+      <stop offset="0" stop-color="#f3d7c2"/>
+      <stop offset="1" stop-color="#fbf6ef"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="606" width="1200" height="24" fill="#c2603d"/>
+
+  <circle cx="230" cy="300" r="138" fill="#f7e1d5" stroke="#c2603d" stroke-width="8"/>
+  <text x="230" y="358" text-anchor="middle" font-family="Georgia, 'Bitstream Charter', serif" font-size="170" font-weight="700" fill="#a34a2a">N</text>
+
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif">
+    <text x="430" y="170" font-size="30" font-weight="700" letter-spacing="5" fill="#a34a2a">NICE TO KNOW</text>
+    <g font-family="Georgia, 'Bitstream Charter', serif" font-size="56" font-weight="700" fill="#2b211c">
+      <text x="430" y="252">Philippine laws, policies</text>
+      <text x="430" y="320">and government processes,</text>
+      <text x="430" y="388">explained in plain language.</text>
+    </g>
+    <text x="430" y="470" font-size="32" font-weight="600" fill="#6e5a4e">@missniceph</text>
+  </g>
+</svg>

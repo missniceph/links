@@ -49,19 +49,19 @@ window.LINKS = [
   },
   {
     label: "TikTok",
-    url: "https://www.tiktok.com/@missniceph"
+    url: "https://www.tiktok.com/@missniceph",
     icon: "tiktok",
     isNew: false,
   },
   {
     label: "Facebook",
-    url: "https://www.facebook.com/missniceph"
+    url: "https://www.facebook.com/missniceph",
     icon: "facebook",
     isNew: false,
   },
   {
     label: "YouTube",
-    url: "https://www.youtube.com/@missniceph"
+    url: "https://www.youtube.com/@missniceph",
     icon: "youtube",
     isNew: false,
   },

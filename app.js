@@ -20,79 +20,107 @@
   };
   var ARROW = '<path d="M7 17 17 7M9 7h8v8"/>';
 
-  function svg(paths, cls) {
+  function svg(paths) {
     return (
-      '<svg class="' + cls + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-      'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
       paths + "</svg>"
     );
   }
 
-  function text(id, value) {
+  function span(cls, html) {
+    var el = document.createElement("span");
+    el.className = cls;
+    if (html) el.innerHTML = html;
+    return el;
+  }
+
+  function clean(value) {
+    return typeof value === "string" ? value.trim() : "";
+  }
+
+  function setText(id, value) {
     var el = document.getElementById(id);
-    if (el && value) el.textContent = value;
+    if (el && clean(value)) el.textContent = clean(value);
+  }
+
+  // Only allow web, email and phone links (blocks typos like "javascript:").
+  function safeUrl(url) {
+    url = clean(url);
+    if (!url) return "";
+    if (/^(https?:|mailto:|tel:)/i.test(url)) return url;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return "";
+    if (/^www\./i.test(url) || /^[^\/]+\.[a-z]{2,}(\/|$)/i.test(url)) return "https://" + url;
+    return url; // relative link, e.g. "guide.html"
   }
 
   var site = window.SITE || {};
-  var links = window.LINKS || [];
+  var loaded = Array.isArray(window.LINKS);
+  var links = loaded ? window.LINKS : [];
 
-  text("name", site.name);
-  text("handle", site.handle);
-  text("tagline", site.tagline);
-  text("year", String(new Date().getFullYear()));
+  setText("name", site.name);
+  setText("brand", site.brand);
+  setText("handle", site.handle);
+  setText("tagline", site.tagline);
+  setText("year", String(new Date().getFullYear()));
 
-  if (site.photo) {
+  // Profile photo: keep the "N" circle until the photo has loaded; keep it if the photo fails.
+  var photo = clean(site.photo);
+  if (photo) {
     var avatar = document.getElementById("avatar");
     var img = new Image();
-    img.alt = site.name || "Profile photo";
+    img.alt = "Photo of " + (clean(site.name) || "Nice");
     img.width = 112;
     img.height = 112;
     img.decoding = "async";
+    img.setAttribute("fetchpriority", "high");
     img.onload = function () {
-      avatar.innerHTML = "";
+      avatar.textContent = "";
       avatar.appendChild(img);
-      avatar.removeAttribute("aria-hidden");
     };
-    img.src = site.photo;
+    img.src = photo;
   }
 
   var list = document.getElementById("links");
-  list.innerHTML = "";
+
+  // Safety net: if links.js is missing or has a typo, show the backup list
+  // written in index.html instead of an empty page.
+  if (!loaded) {
+    var backup = document.querySelector("nav noscript");
+    if (backup) list.outerHTML = backup.textContent;
+    return;
+  }
+
+  var fragment = document.createDocumentFragment();
 
   links.forEach(function (item) {
-    if (!item || !item.url || !String(item.url).trim()) return; // empty url = hidden
+    if (!item) return;
+    var url = safeUrl(item.url);
+    if (!url) return; // empty url = hidden button
 
-    var li = document.createElement("li");
+    var label = clean(item.label) || url;
     var a = document.createElement("a");
     a.className = "link";
-    a.href = item.url;
-    a.rel = "noopener";
+    a.href = url;
 
-    var icon = document.createElement("span");
-    icon.className = "link-icon";
-    icon.innerHTML = svg(ICONS[item.icon] || ICONS.link, "icon");
+    a.appendChild(span("link-icon", svg(ICONS[clean(item.icon).toLowerCase()] || ICONS.link)));
 
-    var label = document.createElement("span");
-    label.className = "link-label";
-    label.textContent = item.label || item.url;
+    var text = span("link-label");
+    text.textContent = label;
+    a.appendChild(text);
 
-    a.appendChild(icon);
-    a.appendChild(label);
-
-    if (item.isNew) {
-      var badge = document.createElement("span");
-      badge.className = "badge";
+    if (item.isNew === true || item.isNew === "true") {
+      var badge = span("badge");
       badge.textContent = "NEW";
       a.appendChild(badge);
-      a.setAttribute("aria-label", (item.label || item.url) + " (new)");
     }
 
-    var arrow = document.createElement("span");
-    arrow.className = "link-arrow";
-    arrow.innerHTML = svg(ARROW, "icon");
-    a.appendChild(arrow);
+    a.appendChild(span("link-arrow", svg(ARROW)));
 
+    var li = document.createElement("li");
     li.appendChild(a);
-    list.appendChild(li);
+    fragment.appendChild(li);
   });
+
+  list.appendChild(fragment);
 })();

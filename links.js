@@ -10,15 +10,15 @@ window.SITE = {
   brand: "Nice to Know",
 
   /* Tagline — pick one (or write your own) and paste it below.
-     Option 1: "Philippine laws, policies and government processes — explained in plain language."
-     Option 2: "Making sense of PH laws and gov't processes, one explainer at a time."
-     Option 3: "Para alam mo: Philippine laws and government processes, made simple."
+     Option 1 (English, in use): "Philippine laws, policies and government processes — explained in plain language."
+     Option 2 (English, casual): "Making sense of PH laws, policies and gov't processes, one explainer at a time."
+     Option 3 (Taglish):         "Batas, polisiya at proseso ng gobyerno, ipinaliwanag nang simple. Para alam mo!"
   */
   tagline: "Philippine laws, policies and government processes — explained in plain language.",
 
   /* Profile photo: put your photo in the "images" folder, then type its
      file name here, e.g. "images/profile.jpg".
-     Leave it as "" to show the "N" placeholder circle. */
+     Leave it as "" to show the "N" circle instead. Square photos look best. */
   photo: "images/profile.jpg",
 };
 

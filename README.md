@@ -2,9 +2,9 @@
 
 The link-in-bio page for **Nice to Know** by [@missniceph](https://instagram.com/missniceph).
 
-Once GitHub Pages is on, the page lives at **https://missniceph.github.io/links/**.
+Live at **https://missniceph.github.io/links/**.
 
-It is plain HTML, CSS and JavaScript: no frameworks, no tracking, no cookies, no outside fonts or scripts. It follows your phone's light or dark mode on its own.
+It is plain HTML, CSS and JavaScript: no frameworks, no tracking, no cookies, no outside fonts or scripts. The whole page is about 25 KB, so it loads quickly even on slow mobile data. It follows your phone's light or dark mode on its own.
 
 ---
 
@@ -36,11 +36,11 @@ Each link looks like this:
 | `icon` | One of: `instagram`, `tiktok`, `facebook`, `youtube`, `website`, `guide`, `link`. |
 | `isNew` | `true` shows a **NEW** badge. `false` hides it. |
 
-**Keep the quote marks `" "` around words, and the comma `,` after the closing `}`.** Those are the two things that most often break the page. If the buttons disappear after an edit, check for a missing quote or comma.
+**Keep the quote marks `" "` around words, and the comma `,` after the closing `}`.** Those are the two things that most often break the page. If your buttons suddenly show without icons after an edit, the page is using its backup list: check for a missing quote or comma.
 
 ### Add a link
 
-Copy a whole block (from `{` to `},`), paste it where you want the new button to appear, and change the details:
+Copy a whole block (from `{` to `},`), paste it where you want the new button to appear, and change the details. For example (this is a made-up address):
 
 ```js
 {
@@ -55,19 +55,11 @@ Copy a whole block (from `{` to `},`), paste it where you want the new button to
 
 Delete its whole block, from `{` down to and including `},`.
 
-To hide a link without deleting it, just empty the address: `url: "",`. The button won't show until you put an address back. That's how TikTok, Facebook and YouTube are set up right now.
+To hide a link without deleting it, just empty the address: `url: "",`. The button won't show until you put an address back.
 
 ### Reorder links
 
 Buttons appear in the same order as in the file, top to bottom. To move one, cut its whole block (`{` to `},`) and paste it above or below another block.
-
-### Turn on TikTok, Facebook or YouTube
-
-Find the block and fill in the address, for example:
-
-```js
-url: "https://www.tiktok.com/@missniceph",
-```
 
 ### Mark a link as new
 
@@ -79,36 +71,41 @@ Change `isNew: false,` to `isNew: true,`. Change it back when it's no longer new
 
 These are at the top of `links.js`, in the `SITE` section.
 
-- **Tagline:** three ready-made options are written in the comment just above `tagline:`. Copy the one you like between the quote marks.
+- **Tagline:** three ready-made options (two English, one Taglish) are written in the comment just above `tagline:`. Copy the one you like between the quote marks.
 - **Photo:** upload a square photo into the `images` folder (on GitHub: open the folder → **Add file** → **Upload files**). Name it `profile.jpg`, then set:
 
   ```js
   photo: "images/profile.jpg",
   ```
 
-  Keep it small (about 400 × 400 pixels) so the page stays fast. Until you add one, a warm "N" circle shows instead.
+  Keep it small (about 400 × 400 pixels) so the page stays fast. If the photo is missing, a warm "N" circle shows instead.
 
 ---
 
-## Turn on GitHub Pages (one time only)
+## What's here and how to update it
 
-1. In the repository, go to **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-3. Pick the **`main`** branch and the **`/ (root)`** folder, then **Save**.
-4. After a minute or two, your page is live at `https://missniceph.github.io/links/`.
+| File | What it is | When to touch it |
+|------|------------|------------------|
+| `links.js` | Your name, tagline, photo and buttons. | **Any time you change a link.** |
+| `images/profile.jpg` | Your profile photo (square, 336 × 336). | When you get a new photo. Upload one with the same name to replace it. |
+| `index.html` | The page itself, plus a **backup list** of your links. | Only if your main links change for good (see below). |
+| `og-image.png` | The preview picture people see when your link is shared on Messenger, Facebook, Viber and so on. | When your tagline changes. |
+| `og-image.svg` | The editable source of that preview picture. | Edit the words in it, then export it again as a 1200 × 630 PNG named `og-image.png`. |
+| `favicon.svg`, `apple-touch-icon.png` | The "N" icon in browser tabs and on phone home screens. | Rarely. |
+| `styles.css` | Colours and layout for light and dark mode. | Only for design changes. |
+| `app.js` | Turns `links.js` into buttons. | Never needed. |
+| `.nojekyll` | Tells GitHub Pages to serve the files as they are. | Never. |
 
-Put that address in your Instagram, TikTok, Facebook and YouTube bios.
+**About the backup list:** if `links.js` ever has a typo (like a missing quote mark), the page doesn't go blank. It shows the backup links written in `index.html` instead. The same list shows for anyone who has JavaScript turned off. If you permanently add or remove a main link, update that list too. It's the block that starts with `<noscript>`.
+
+**Checking a change:** after you commit, wait a minute or two, then open the page and refresh. If you see plain buttons without icons, there's a typo in `links.js`. Look for a missing `"` or `,`.
+
+**Seeing the share preview update:** Facebook and Messenger remember old previews. After changing `og-image.png`, paste your link into https://developers.facebook.com/tools/debug/ and click **Scrape Again**.
 
 ---
 
-## What's in this folder
+## GitHub Pages
 
-| File | What it is |
-|------|------------|
-| `links.js` | **Your settings and links. Edit this one.** |
-| `index.html` | The page itself. |
-| `styles.css` | Colors, fonts and layout, for both light and dark mode. |
-| `app.js` | Turns `links.js` into buttons. No need to touch it. |
-| `favicon.svg` | The little "N" icon in the browser tab. |
-| `images/` | Where your profile photo goes. |
-| `.nojekyll` | Tells GitHub Pages to serve the files as they are. |
+GitHub Pages is already turned on for this repository. The page is at **https://missniceph.github.io/links/**.
+
+If it ever stops working, go to **Settings → Pages** and make sure **Source** is **Deploy from a branch**, using **`main`** and **`/ (root)`**.

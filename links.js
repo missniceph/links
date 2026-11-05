@@ -19,7 +19,7 @@ window.SITE = {
   /* Profile photo: put your photo in the "images" folder, then type its
      file name here, e.g. "images/profile.jpg".
      Leave it as "" to show the "N" placeholder circle. */
-  photo: "",
+  photo: "images/profile.jpg",
 };
 
 /* LINKS — shown on the page from top to bottom, in this order.
@@ -49,19 +49,19 @@ window.LINKS = [
   },
   {
     label: "TikTok",
-    url: "", // e.g. "https://www.tiktok.com/@missniceph"
+    url: "https://www.tiktok.com/@missniceph",
     icon: "tiktok",
     isNew: false,
   },
   {
     label: "Facebook",
-    url: "", // e.g. "https://www.facebook.com/missniceph"
+    url: "https://www.facebook.com/missniceph",
     icon: "facebook",
     isNew: false,
   },
   {
     label: "YouTube",
-    url: "", // e.g. "https://www.youtube.com/@missniceph"
+    url: "https://www.youtube.com/@missniceph",
     icon: "youtube",
     isNew: false,
   },
